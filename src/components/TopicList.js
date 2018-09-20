@@ -3,13 +3,9 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
-import Avatar from '@material-ui/core/Avatar';
-import Divider from '@material-ui/core/Divider';
 import Button from '@material-ui/core/Button';
-import ImageIcon from '@material-ui/icons/Image';
 import { TopicContext } from '../containers/TopicListContainer';
+import Topic from './Topic';
 
 const styles = theme => ({
   root: {
@@ -28,15 +24,7 @@ const TopicList = (props) => (
       <Paper className={props.classes.root} elevation={1}>
         <List>
           {topics.map(topic => (
-            <React.Fragment key={topic.id}>
-                <ListItem>
-                  <Avatar>
-                    <ImageIcon />
-                  </Avatar>
-                  <ListItemText primary={topic.title} secondary="Author Jan 9, 2014" />
-                </ListItem>
-                <Divider light />
-            </React.Fragment>
+            <Topic topic={topic} key={topic.id} />
           ))}
         </List>
 

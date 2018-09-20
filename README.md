@@ -23,7 +23,7 @@ Please visit <http://ruby-china.liuzhen.me/> for demo
 * react-router
 * create-react-app
 * marked
-* es6-promise
+* es6-async-await-pattern
 * react material-ui
 
 ## Setup and running locally
@@ -41,13 +41,16 @@ $ yarn start
 
 ### visit <http://localhost:3000>
 
-## References
-* foo
-* bar
+## References & inspiration
+* React 16.3.0 improved Context API <https://reactjs.org/docs/context.html>
+* <https://auth0.com/blog/react-context-api-managing-state-with-ease>
+* <https://www.valentinog.com/blog/how-async-await-in-react/>
+* A great RubyChina clone frontend project: <https://github.com/liuzhenangel/react-ruby-china/blob/master/src/Format.js>
 
 ## Roadmap
 
 - [ ] fetch topics, nodes
+- [ ] add tests and linter
 - [ ] search and filter topics
 - [ ] signup, login & logout
 - [ ] create new topics, markdown editor

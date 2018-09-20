@@ -6,16 +6,6 @@ import PropTypes from 'prop-types';
 import MainNavigation from './components/MobileBtmNav';
 import TopicListContainer from './containers/TopicListContainer';
 import './App.css';
-// import logo from './logo.svg';
-
-const dummyTopics = [];
-for (let i = 0; i < 20; i++) {
-  dummyTopics.push({
-    "id": 123 * (i + 1),
-    "title": "手机自适应的问题",
-    "updated_at": "2018-09-17T18:01:22.393+08:00"
-  })
-}
 
 const styles = theme => ({
   sectionDesktop: {

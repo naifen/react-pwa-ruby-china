@@ -1,46 +1,83 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import { withStyles } from '@material-ui/core/styles';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import TopAppBar from '../components/TopAppBar';
 import TopicList from '../components/TopicList';
+import { TOPICS_URL } from '../utils/constants';
 
 export const TopicContext = React.createContext();
 
-const dummyTopics = [];
-for (let i = 0; i < 20; i++) {
-  dummyTopics.push({
-    "id": 123 * (i + 1),
-    "title": "手机自适应的问题",
-    "updated_at": "2018-09-17T18:01:22.393+08:00"
-  })
-}
+const styles = theme => ({
+  progress: {
+    margin: theme.spacing.unit * 2,
+  },
+});
 
 class TopicListContainer extends React.Component {
   constructor(props) {
     super(props);
 
-    this.loadTopics = () => {
-      // this.setState(state => ({
-      //   topics: [...state.topics, moreTopics]
-      // }));
-      console.log("Loading topics");
+    this.state = {
+      topics: [],
+      isLoading: true,
     };
 
-    // State also contains the updater function so it will
-    // be passed down into the context provider
-    this.state = {
-      topics: dummyTopics,
-      loadTopics: this.loadTopics,
-    };
+    // preferred bind in constructor so that it's in the same scope with setState
+    // explain: https://github.com/airbnb/javascript/tree/master/react#methods
+    this.loadTopics = this.loadTopics.bind(this);
   }
 
+  // TODO: filter url params, node_id, type, etc
+  // TODO: Drag Down to reload
+  async componentDidMount() {
+    try {
+      const response = await fetch(TOPICS_URL);
+      if (!response.ok) {
+        throw Error(response.statusText);
+      }
+      const json = await response.json();
+      this.setState({ topics: json.topics, isLoading: false });
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async loadTopics() {
+    try {
+      const response = await fetch(`${TOPICS_URL}&offset=${this.state.topics.length}`);
+      if (!response.ok) {
+        throw Error(response.statusText);
+      }
+      const json = await response.json();
+      this.setState(state => ({
+        topics: [...state.topics, ...json.topics]
+      }));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   render() {
-    // The entire state is passed to the provider
+    const { classes } = this.props;
+
     return (
-      <TopicContext.Provider value={this.state}>
+      <TopicContext.Provider
+        value={{ ...this.state, loadTopics: this.loadTopics }}
+      >
         <TopAppBar />
-        <TopicList />
+        {this.state.isLoading ? (
+          <CircularProgress className={classes.progress} color="secondary" />
+        ) : (
+          <TopicList />
+        )}
       </TopicContext.Provider>
     );
   }
 }
 
-export default TopicListContainer;
+TopicListContainer.propTypes = {
+  classes: PropTypes.object.isRequired,
+};
+
+export default withStyles(styles)(TopicListContainer);
