@@ -4,7 +4,7 @@ import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import PropTypes from 'prop-types';
 import MainNavigation from './components/MobileBtmNav';
-import TopicList from './components/TopicList';
+import TopicListContainer from './containers/TopicListContainer';
 import './App.css';
 // import logo from './logo.svg';
 
@@ -48,7 +48,7 @@ class App extends Component {
       <React.Fragment>
         <CssBaseline />
         <div className="App">
-          <TopicList topics={dummyTopics} />
+          <TopicListContainer />
 
           <div className={classes.sectionMobile}>
             <MainNavigation />
