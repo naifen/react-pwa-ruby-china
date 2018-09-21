@@ -16,6 +16,7 @@ const styles = theme => ({
   },
 });
 
+// TODO: add routing here with react router
 class MobileBtmNav extends React.Component {
   state = {
     value: 'topics',

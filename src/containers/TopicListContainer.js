@@ -1,18 +1,9 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
-import CircularProgress from '@material-ui/core/CircularProgress';
 import TopAppBar from '../components/TopAppBar';
 import TopicList from '../components/TopicList';
 import { TOPICS_URL } from '../utils/constants';
 
 export const TopicContext = React.createContext();
-
-const styles = theme => ({
-  progress: {
-    margin: theme.spacing.unit * 2,
-  },
-});
 
 class TopicListContainer extends React.Component {
   constructor(props) {
@@ -20,18 +11,14 @@ class TopicListContainer extends React.Component {
 
     this.state = {
       topics: [],
-      isLoading: true,
+      isLoading: false,
     };
-
-    // preferred bind in constructor so that it's in the same scope with setState
-    // explain: https://github.com/airbnb/javascript/tree/master/react#methods
-    this.loadTopics = this.loadTopics.bind(this);
   }
 
-  // TODO: filter url params, node_id, type, etc
   // TODO: Drag Down to reload
   async componentDidMount() {
     try {
+      this.setState({ isLoading: true });
       const response = await fetch(TOPICS_URL);
       if (!response.ok) {
         throw Error(response.statusText);
@@ -41,43 +28,52 @@ class TopicListContainer extends React.Component {
     } catch (error) {
       console.log(error);
     }
+
+    window.addEventListener('scroll', this.onScroll, false);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this.onScroll, false);
   }
 
   async loadTopics() {
     try {
+      this.setState({ isLoading: true });
       const response = await fetch(`${TOPICS_URL}&offset=${this.state.topics.length}`);
       if (!response.ok) {
         throw Error(response.statusText);
       }
       const json = await response.json();
       this.setState(state => ({
-        topics: [...state.topics, ...json.topics]
+        topics: [...state.topics, ...json.topics],
+        isLoading: false,
       }));
     } catch (error) {
       console.log(error);
     }
   };
 
-  render() {
-    const { classes } = this.props;
+  onScroll = () => {
+    if (
+      (window.innerHeight + window.scrollY) >= (document.body.offsetHeight - 500) &&
+      this.state.topics.length &&
+      !this.state.isLoading
+    ) {
+      this.loadTopics();
+    }
+  }
 
+  // TODO: hide TopAppBar while scroll down, show while scroll up
+  render() {
     return (
       <TopicContext.Provider
-        value={{ ...this.state, loadTopics: this.loadTopics }}
+        value={this.state}
       >
         <TopAppBar />
-        {this.state.isLoading ? (
-          <CircularProgress className={classes.progress} color="secondary" />
-        ) : (
-          <TopicList />
-        )}
+        <TopicList />
       </TopicContext.Provider>
     );
   }
 }
 
-TopicListContainer.propTypes = {
-  classes: PropTypes.object.isRequired,
-};
-
-export default withStyles(styles)(TopicListContainer);
+export default TopicListContainer;

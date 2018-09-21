@@ -13,7 +13,7 @@ const styles = theme => ({
   },
 });
 
-const Topic = (props) => {
+const TopicListItem = (props) => {
   const { topic } = props;
   // TODO: last replied timestamp, same as ruby china app
   const secondaryText = `${topic.node_name} • ${topic.user.login} •
@@ -29,9 +29,9 @@ const Topic = (props) => {
   );
   }
 
-Topic.propTypes = {
+TopicListItem.propTypes = {
   classes: PropTypes.object.isRequired,
   topic: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(Topic);
+export default withStyles(styles)(TopicListItem);

@@ -86,6 +86,7 @@ const styles = theme => ({
   },
 });
 
+// TODO: implements searching and filtering topics(node_id, type)
 class TopAppBar extends React.Component {
   state = {
     anchorEl: null,
