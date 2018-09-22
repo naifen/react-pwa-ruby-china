@@ -10,7 +10,10 @@ import TopicListItem from './TopicListItem';
 const styles = theme => ({
   root: {
     width: '100%',
+    margin: 'auto',
+    maxWidth: 960,
     overflow: 'auto',
+    paddingBottom: 60,
     backgroundColor: theme.palette.background.default,
   },
   progress: {

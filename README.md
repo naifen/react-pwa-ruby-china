@@ -4,13 +4,13 @@
 
 ## Motivation
 
-I consider myself as "rubyist" 😄, so I browse various ruby sites to learn new stuff on a daily basis including <https://ruby-china.org/>, which is the biggest ruby community in China, with my mac and phone.
+I consider myself as "rubyist" 😄 and I browse various of ruby sites on a daily basis to learn new stuffs. <https://ruby-china.org/> is one of them, which is the biggest ruby community in China.
 
-The official IOS client is pretty good and I enjoyed it a lot. Recently I switched to an Android device but couldn't find a decent and up-to-date client.
+The official IOS client is pretty good and I enjoyed it a lot. Recently I switched to an Android device but couldn't find a decent and up-to-date client. (the site itself is responsive, it doesn't feel like an app tho)
 
 Since the ruby-china maintainers made some great APIs as well, I figured why not roll my own client? It's 2018 now, PWA is a thing, React's became many folks go-to UI framework, so I decided to combine these two together and give it a try.
 
-My goal here is to focus on the mobile UI(I'll go with <https://material-ui.com/>) & UX, the final app can be saved to desktop and work as a native client(which is a PWA suppose to be like). I'll keep the tech stacks minimal and the app should be snappy and reliable.
+My goal here is to focus on the mobile UI (Material Design <https://material-ui.com/> is my choice) & UX similar to IOS version. The final app can be saved to desktop and work just like a native client(which is what a PWA suppose to be like). I'll try not to bloat it with npm packages and keep it snappy, minimal and reliable.
 
 ## Demo
 
@@ -22,7 +22,6 @@ Please visit <http://ruby-china.liuzhen.me/> for demo
 * react-dom
 * react-router
 * create-react-app
-* marked
 * es6-async-await-pattern
 * react material-ui
 
@@ -50,14 +49,15 @@ $ yarn start
 
 ## Roadmap
 
-- [ ] fetch topics, nodes
+- [ ] fetch topics and topic
 - [ ] add tests and linter
-- [ ] search and filter topics
+- [ ] search and filter topics by types and nodes
 - [ ] signup, login & logout
 - [ ] create new topics, markdown editor
 - [ ] star & subscribe a topic
 - [ ] comment on a topic, reply and like comments
 - [ ] create bookmarks & notes
+- [ ] push notifications
 
 ## Contributor & Maintainer
 
