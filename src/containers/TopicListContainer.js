@@ -1,4 +1,5 @@
 import React from 'react';
+import Headroom from 'react-headroom'
 import TopAppBar from '../components/TopAppBar';
 import TopicList from '../components/TopicList';
 import { TOPICS_URL } from '../utils/constants';
@@ -63,13 +64,14 @@ class TopicListContainer extends React.Component {
     }
   }
 
-  // TODO: hide TopAppBar while scroll down, show while scroll up
   render() {
     return (
       <TopicContext.Provider
         value={this.state}
       >
-        <TopAppBar />
+        <Headroom style={{position: 'fixed'}}>
+          <TopAppBar />
+        </Headroom>
         <TopicList />
       </TopicContext.Provider>
     );
