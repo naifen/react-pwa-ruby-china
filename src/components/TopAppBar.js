@@ -86,6 +86,7 @@ const styles = theme => ({
   },
 });
 
+// TODO: implements searching and filtering topics(node_id, type)
 class TopAppBar extends React.Component {
   state = {
     anchorEl: null,
@@ -162,7 +163,7 @@ class TopAppBar extends React.Component {
 
     return (
       <div className={classes.root}>
-        <AppBar position="static">
+        <AppBar position="static" color="secondary">
           <Toolbar>
             <IconButton className={classes.menuButton} color="inherit" aria-label="Open drawer">
               <MenuIcon />

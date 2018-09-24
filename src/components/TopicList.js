@@ -3,47 +3,63 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
-import Avatar from '@material-ui/core/Avatar';
-import Divider from '@material-ui/core/Divider';
-import Button from '@material-ui/core/Button';
-import ImageIcon from '@material-ui/icons/Image';
-import TopAppBar from './TopAppBar';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import Typography from '@material-ui/core/Typography';
+import { TopicContext } from '../containers/TopicListContainer';
+import TopicListItem from './TopicListItem';
 
 const styles = theme => ({
   root: {
     width: '100%',
+    margin: 'auto',
+    maxWidth: 960,
     overflow: 'auto',
     paddingBottom: 60,
     backgroundColor: theme.palette.background.default,
   },
+  progress: {
+    marginTop: theme.spacing.unit * 2,
+  },
 });
 
-// TODO: hide TopAppBar while scroll down, show while scroll up
-const TopicList = ({ classes, topics }) => (
-  <div>
-    <TopAppBar />
-    <Paper className={classes.root} elevation={1}>
-      <List>
-        {topics.map(topic => (
-          <React.Fragment key={topic.id}>
-              <ListItem>
-                <Avatar>
-                  <ImageIcon />
-                </Avatar>
-                <ListItemText primary={topic.title} secondary="Author Jan 9, 2014" />
-              </ListItem>
-              <Divider light />
-          </React.Fragment>
-        ))}
-      </List>
 
-      <Button variant="contained" color="primary">
-        Load more
-      </Button>
-    </Paper>
-	</div>
+// TODO: pull down not smooth on mobile Firefox and Safari
+const TopicList = (props) => (
+  <TopicContext.Consumer>
+    {({ topics, isLoading, isPullingDown, pullDownHeight, isRefreshing }) => (
+      <Paper className={props.classes.root} elevation={1}>
+        {isPullingDown &&
+          <div style={{
+            height: pullDownHeight,
+            WebkitTransition: "height 300ms cubic-bezier(0,0,0.2,1)",
+            transition: "height 300ms cubic-bezier(0,0,0.2,1)",
+          }}>
+            <br />
+            <Typography variant="subheading" gutterBottom>
+              { pullDownHeight > 40 ? "Release to refresh" : "Pull down to refresh" }
+            </Typography>
+          </div>
+        }
+        {isRefreshing &&
+          <CircularProgress
+            className={props.classes.progress}
+            color="secondary" size={30}
+          />
+        }
+        <List>
+          {topics.map(topic => (
+            <TopicListItem topic={topic} key={topic.id} />
+          ))}
+        </List>
+        {isLoading &&
+          <CircularProgress
+            className={props.classes.progress}
+            color="secondary" size={30}
+          />
+        }
+      </Paper>
+    )}
+  </TopicContext.Consumer>
 );
 
 TopicList.propTypes = {

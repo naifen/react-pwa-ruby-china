@@ -4,18 +4,8 @@ import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import PropTypes from 'prop-types';
 import MainNavigation from './components/MobileBtmNav';
-import TopicList from './components/TopicList';
+import TopicListContainer from './containers/TopicListContainer';
 import './App.css';
-// import logo from './logo.svg';
-
-const dummyTopics = [];
-for (let i = 0; i < 20; i++) {
-  dummyTopics.push({
-    "id": 123 * (i + 1),
-    "title": "手机自适应的问题",
-    "updated_at": "2018-09-17T18:01:22.393+08:00"
-  })
-}
 
 const styles = theme => ({
   sectionDesktop: {
@@ -24,14 +14,12 @@ const styles = theme => ({
       display: 'flex',
     },
   },
-
   sectionMobile: {
     display: 'flex',
     [theme.breakpoints.up('md')]: {
       display: 'none',
     },
   },
-
   footer: {
     marginLeft: 'auto',
     marginRight: 'auto',
@@ -48,7 +36,7 @@ class App extends Component {
       <React.Fragment>
         <CssBaseline />
         <div className="App">
-          <TopicList topics={dummyTopics} />
+          <TopicListContainer />
 
           <div className={classes.sectionMobile}>
             <MainNavigation />
