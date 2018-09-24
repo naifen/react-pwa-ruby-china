@@ -18,18 +18,20 @@ Please visit <> for demo
 
 ## Powered by the following techs:
 
-* react
-* react-dom
-* react-router
-* create-react-app
-* es6-async-await-pattern
-* react material-ui
+- react
+- react-dom
+- react-router
+- create-react-app
+- es6-async-await-pattern
+- react material-ui
+- eslint + prettier
 
 ## Setup and running locally
 
 ### make sure you have
-* Node ( >= 6.5 )
-* npm ( >= 3.10.6 )
+
+- Node ( >= 6.5 )
+- npm ( >= 3.10.6 )
 
 ### install dependencies and run
 
@@ -41,12 +43,14 @@ $ yarn start
 ### visit <http://localhost:3000>
 
 ## References & inspiration
-* React 16.3.0 improved Context API <https://reactjs.org/docs/context.html>
-* <https://auth0.com/blog/react-context-api-managing-state-with-ease>
-* React async await pattern: <https://www.valentinog.com/blog/how-async-await-in-react/>
-* A great RubyChina clone frontend project: <https://github.com/liuzhenangel/react-ruby-china/blob/master/src/Format.js>
-* infinite scroll in react <https://www.robinwieruch.de/react-infinite-scroll/>
-* pull down: <https://developers.google.com/web/updates/2017/11/overscroll-behavior>
+
+- React 16.3.0 improved Context API <https://reactjs.org/docs/context.html>
+- <https://auth0.com/blog/react-context-api-managing-state-with-ease>
+- React async await pattern: <https://www.valentinog.com/blog/how-async-await-in-react/>
+- A great RubyChina clone frontend project: <https://github.com/liuzhenangel/react-ruby-china/blob/master/src/Format.js>
+- infinite scroll in react <https://www.robinwieruch.de/react-infinite-scroll/>
+- pull down: <https://developers.google.com/web/updates/2017/11/overscroll-behavior>
+- ESlint + Prettier: <https://www.youtube.com/watch?v=bfyI9yl3qfE> & <https://medium.com/appstud/eslint-and-prettier-working-on-visual-studio-code-with-create-react-app-32dfef4b029c>
 
 ## Roadmap
 
@@ -62,7 +66,7 @@ $ yarn start
 
 ## Contributor & Maintainer
 
-* Jerry G
+- Jerry G
 
 ## LICENSE
 
