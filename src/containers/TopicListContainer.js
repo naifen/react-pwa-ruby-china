@@ -27,43 +27,19 @@ class TopicListContainer extends React.Component {
     );
 
     window.addEventListener('scroll', this.onScroll, false);
-
-    document.addEventListener('touchstart', e => {
-      this.initY = e.touches[0].pageY;
-    }, { passive: true });
-
-    document.addEventListener('touchmove', e => {
-      const y = e.touches[0].pageY;
-
-      if (document.scrollingElement.scrollTop === 0 && y > this.initY &&
-        !this.state.isRefreshing) {
-        let diff = y - this.initY > 55 ? 55 : y - this.initY;
-
-        this.state.isPullingDown
-          ? this.setState({ pullDownHeight: diff })
-          : this.setState({ isPullingDown: true, pullDownHeight: diff });
-      }
-    }, { passive: true });
-
-    document.addEventListener('touchend', e => {
-      if (this.state.isPullingDown && this.state.pullDownHeight > 0) {
-        this.setState({ isPullingDown: false });
-
-        if (this.state.pullDownHeight > 40)
-          this.handleTopicsFetch(
-            TOPICS_URL,
-            { isRefreshing: true },
-            json => ({ topics: json.topics, isRefreshing: false })
-          );
-      }
-    }, { passive: true });
+    document.addEventListener('touchstart', this.onTouchStart, { passive: true });
+    document.addEventListener('touchmove', this.onTouchMove, { passive: true });
+    document.addEventListener('touchend', this.onTouchEnd, { passive: true });
   }
 
   componentWillUnmount() {
-    window.removeEventListener('scroll', this.onScroll, false);
+    window.removeEventListener('scroll', this.onScroll);
+    document.removeEventListener('touchstart', this.onTouchStart);
+    document.removeEventListener('touchmove', this.onTouchMove);
+    document.removeEventListener('touchend', this.onTouchEnd);
   }
 
-  async handleTopicsFetch(url, beforeState, afterState) {
+  handleTopicsFetch = async (url, beforeState, afterState) => {
     try {
       this.setState(beforeState);
 
@@ -93,6 +69,34 @@ class TopicListContainer extends React.Component {
           isLoading: false,
         })
       );
+    }
+  }
+
+  onTouchStart = e => this.initY = e.touches[0].pageY
+
+  onTouchMove = e => {
+    const y = e.touches[0].pageY;
+
+    if (document.scrollingElement.scrollTop === 0 && y > this.initY &&
+      !this.state.isRefreshing) {
+      let diff = y - this.initY > 55 ? 55 : y - this.initY;
+
+      this.state.isPullingDown
+        ? this.setState({ pullDownHeight: diff })
+        : this.setState({ isPullingDown: true, pullDownHeight: diff });
+    }
+  }
+
+  onTouchEnd = e => {
+    if (this.state.isPullingDown && this.state.pullDownHeight > 0) {
+      this.setState({ isPullingDown: false });
+
+      if (this.state.pullDownHeight > 40)
+        this.handleTopicsFetch(
+          TOPICS_URL,
+          { isRefreshing: true },
+          json => ({ topics: json.topics, isRefreshing: false })
+        );
     }
   }
 
