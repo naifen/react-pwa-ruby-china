@@ -13,10 +13,12 @@ class TopicListContainer extends React.Component {
     this.state = {
       topics: [],
       isLoading: false,
+      isPullingDown: false,
+      pullDownHeight: 0,
+      isRefreshing: false,
     };
   }
 
-  // TODO: Drag Down to reload
   async componentDidMount() {
     try {
       this.setState({ isLoading: true });
@@ -31,11 +33,48 @@ class TopicListContainer extends React.Component {
     }
 
     window.addEventListener('scroll', this.onScroll, false);
+
+    document.addEventListener('touchstart', e => {
+      this.initY = e.touches[0].pageY;
+    }, { passive: true });
+
+    document.addEventListener('touchmove', e => {
+      const y = e.touches[0].pageY;
+      if (document.scrollingElement.scrollTop === 0 && y > this.initY &&
+        !this.state.isRefreshing) {
+        let diff = y - this.initY > 55 ? 55 : y - this.initY;
+        this.state.isPullingDown
+          ? this.setState({ pullDownHeight: diff })
+          : this.setState({ isPullingDown: true, pullDownHeight: diff });
+      }
+    }, { passive: true });
+
+    document.addEventListener('touchend', e => {
+      if (this.state.isPullingDown && this.state.pullDownHeight > 0) {
+        this.setState({ isPullingDown: false });
+        if (this.state.pullDownHeight > 40)
+          this.refreshTopics();
+      }
+    }, { passive: true });
   }
 
   componentWillUnmount() {
     window.removeEventListener('scroll', this.onScroll, false);
   }
+
+  async refreshTopics() {
+    try {
+      this.setState({ isRefreshing: true });
+      const response = await fetch(TOPICS_URL);
+      if (!response.ok) {
+        throw Error(response.statusText);
+      }
+      const json = await response.json();
+      this.setState({ topics: json.topics, isRefreshing: false });
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   async loadTopics() {
     try {
@@ -45,8 +84,8 @@ class TopicListContainer extends React.Component {
         throw Error(response.statusText);
       }
       const json = await response.json();
-      this.setState(state => ({
-        topics: [...state.topics, ...json.topics],
+      this.setState(prevState => ({
+        topics: [...prevState.topics, ...json.topics],
         isLoading: false,
       }));
     } catch (error) {
@@ -69,7 +108,7 @@ class TopicListContainer extends React.Component {
       <TopicContext.Provider
         value={this.state}
       >
-        <Headroom style={{position: 'fixed'}}>
+        <Headroom style={{ position: 'fixed' }}>
           <TopAppBar />
         </Headroom>
         <TopicList />

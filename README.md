@@ -14,7 +14,7 @@ My goal here is to focus on the mobile UI (Material Design <https://material-ui.
 
 ## Demo
 
-Please visit <http://ruby-china.liuzhen.me/> for demo
+Please visit <> for demo
 
 ## Powered by the following techs:
 
@@ -49,7 +49,7 @@ $ yarn start
 
 ## Roadmap
 
-- [ ] fetch topics and topic
+- [x] fetch topics and topic
 - [ ] add tests and linter
 - [ ] search and filter topics by types and nodes
 - [ ] signup, login & logout
