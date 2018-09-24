@@ -7,6 +7,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import Typography from '@material-ui/core/Typography';
 import { TopicContext } from '../containers/TopicListContainer';
 import TopicListItem from './TopicListItem';
+import { PULL_DOWN_RELEASE_HEIGHT } from '../utils/constants';
 
 const styles = theme => ({
   root: {
@@ -36,7 +37,9 @@ const TopicList = (props) => (
           }}>
             <br />
             <Typography variant="subheading" gutterBottom>
-              { pullDownHeight > 40 ? "Release to refresh" : "Pull down to refresh" }
+              { pullDownHeight > PULL_DOWN_RELEASE_HEIGHT
+                  ? "Release to refresh"
+                  : "Pull down to refresh" }
             </Typography>
           </div>
         }

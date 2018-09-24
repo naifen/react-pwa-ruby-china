@@ -3,6 +3,11 @@ import Headroom from 'react-headroom'
 import TopAppBar from '../components/TopAppBar';
 import TopicList from '../components/TopicList';
 import { TOPICS_URL } from '../utils/constants';
+import {
+  PULL_DOWN_MAX_HEIGHT,
+  PULL_DOWN_RELEASE_HEIGHT,
+  SCROLL_TRIGGER_HEIGHT,
+} from '../utils/constants';
 
 export const TopicContext = React.createContext();
 
@@ -56,8 +61,9 @@ class TopicListContainer extends React.Component {
   }
 
   onScroll = () => {
+    const windowTotalHeight = window.innerHeight + window.scrollY
     if (
-      (window.innerHeight + window.scrollY) >= (document.body.offsetHeight - 500) &&
+      windowTotalHeight >= (document.body.offsetHeight - SCROLL_TRIGGER_HEIGHT) &&
       this.state.topics.length &&
       !this.state.isLoading
     ) {
@@ -79,7 +85,9 @@ class TopicListContainer extends React.Component {
 
     if (document.scrollingElement.scrollTop === 0 && y > this.initY &&
       !this.state.isRefreshing) {
-      let diff = y - this.initY > 55 ? 55 : y - this.initY;
+      let diff = y - this.initY > PULL_DOWN_MAX_HEIGHT
+        ? PULL_DOWN_MAX_HEIGHT
+        : y - this.initY;
 
       this.state.isPullingDown
         ? this.setState({ pullDownHeight: diff })
@@ -91,7 +99,7 @@ class TopicListContainer extends React.Component {
     if (this.state.isPullingDown && this.state.pullDownHeight > 0) {
       this.setState({ isPullingDown: false });
 
-      if (this.state.pullDownHeight > 40)
+      if (this.state.pullDownHeight > PULL_DOWN_RELEASE_HEIGHT)
         this.handleTopicsFetch(
           TOPICS_URL,
           { isRefreshing: true },
