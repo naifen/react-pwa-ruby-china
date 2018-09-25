@@ -9,6 +9,7 @@ const UNITS = {
 };
 
 /**
+ * Returns a string of value + unit, eg 5 hours
  * @param {string} dateString - A date time string eg, "2018-09-22T16:25:14.543+08:00".
  */
 export const timeSince = dateString => {

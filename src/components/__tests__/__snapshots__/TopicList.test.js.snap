@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<TopicList /> should render banner text correctly with given strings 1`] = `
+<TopicList
+  classes={
+    Object {
+      "progress": "TopicList-progress-2",
+      "root": "TopicList-root-1",
+    }
+  }
+/>
+`;
+
+exports[`<TopicList /> should render correctly with no props 1`] = `
+<TopicList
+  classes={
+    Object {
+      "progress": "TopicList-progress-2",
+      "root": "TopicList-root-1",
+    }
+  }
+/>
+`;

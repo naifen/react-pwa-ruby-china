@@ -36,7 +36,6 @@ const TopicListItem = props => {
     </Typography>
   );
 
-  // ternay style https://github.com/airbnb/javascript#comparison--nested-ternaries
   const repliedByText = topic.replied_at
     ? `• last replied by ${topic.last_reply_user_login}
       ${timeSince(topic.replied_at)} ago`

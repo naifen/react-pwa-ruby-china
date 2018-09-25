@@ -30,8 +30,26 @@ Please visit <> for demo
 
 ### make sure you have
 
-- Node ( >= 6.5 )
+- node ( >= 6.5 )
 - npm ( >= 3.10.6 )
+- yarn ( >= 1.9.4)
+- VS Code's ESlint and Prettier extensions work with CRA linter out of box
+
+```json
+// example settings
+"editor.formatOnSave": true,
+    "prettier.disableLanguages": [
+        "js"
+    ],
+    "eslint.autoFixOnSave": true,
+    "eslint.alwaysShowStatus": true,
+    "files.autoSave": "onFocusChange",
+    "[javascript]": {
+        "editor.formatOnSave": false,
+    },
+    ...
+}
+```
 
 ### install dependencies and run
 
@@ -44,25 +62,26 @@ $ yarn start
 
 ## References & inspiration
 
-- React 16.3.0 improved Context API <https://reactjs.org/docs/context.html>
-- <https://auth0.com/blog/react-context-api-managing-state-with-ease>
+- React 16.3.0 improved Context API <https://reactjs.org/docs/context.html> <https://auth0.com/blog/react-context-api-managing-state-with-ease>
 - React async await pattern: <https://www.valentinog.com/blog/how-async-await-in-react/>
 - A great RubyChina clone frontend project: <https://github.com/liuzhenangel/react-ruby-china/blob/master/src/Format.js>
 - infinite scroll in react <https://www.robinwieruch.de/react-infinite-scroll/>
 - pull down: <https://developers.google.com/web/updates/2017/11/overscroll-behavior>
 - ESlint + Prettier: <https://www.youtube.com/watch?v=bfyI9yl3qfE> & <https://medium.com/appstud/eslint-and-prettier-working-on-visual-studio-code-with-create-react-app-32dfef4b029c>
+- Jest + Enzyme : <https://medium.com/codeclan/testing-react-with-jest-and-enzyme-20505fec4675>
 
 ## Roadmap
 
+- [x] project initial setup(test, linter and editor integration, etc)
 - [x] fetch topics and topic
-- [ ] add tests and linter
 - [ ] search and filter topics by types and nodes
+- [ ] make service worker work, deploy and enable https
 - [ ] signup, login & logout
 - [ ] create new topics, markdown editor
 - [ ] star & subscribe a topic
 - [ ] comment on a topic, reply and like comments
 - [ ] create bookmarks & notes
-- [ ] push notifications
+- [ ] push notification
 
 ## Contributor & Maintainer
 
