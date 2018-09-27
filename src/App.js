@@ -1,10 +1,13 @@
 import React, { Component } from "react";
+import { Switch, Route } from "react-router-dom";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import { withStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import PropTypes from "prop-types";
-import MainNavigation from "./components/MobileBtmNav";
 import TopicListContainer from "./containers/TopicListContainer";
+import TopicContainer from "./containers/TopicContainer";
+import MainNavigation from "./components/MobileBtmNav";
+import LoginForm from "./components/LoginForm";
 import "./App.css";
 
 const styles = theme => ({
@@ -28,6 +31,9 @@ const styles = theme => ({
   }
 });
 
+// TODO: do NOT re-fetch topics when switch between url
+// TODO: redirect when hit private route
+// TODO: move routes to a sepreate file
 class App extends Component {
   render() {
     const { classes } = this.props;
@@ -36,7 +42,16 @@ class App extends Component {
       <React.Fragment>
         <CssBaseline />
         <div className="App">
-          <TopicListContainer />
+          <Switch>
+            <Route exact path="/" component={TopicListContainer} />
+            <Route exact path="/topics" component={TopicListContainer} />
+            <Route path="/topics/create" component={LoginForm} />
+            <Route path="/topics/:topicId" component={TopicContainer} />
+            <Route path="/login" component={LoginForm} />
+            <Route path="/register" component={LoginForm} />
+            <Route path="/notifications" component={LoginForm} />
+            <Route path="/account" component={LoginForm} />
+          </Switch>
 
           <div className={classes.sectionMobile}>
             <MainNavigation />

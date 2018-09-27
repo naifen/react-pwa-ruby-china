@@ -8,6 +8,7 @@ import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 import Avatar from "@material-ui/core/Avatar";
 import Typography from "@material-ui/core/Typography";
 import ThumbUpIcon from "@material-ui/icons/ThumbUp";
+import { Link } from "react-router-dom";
 import { timeSince } from "../utils/dateTimeUtils";
 
 const styles = theme => ({
@@ -45,7 +46,12 @@ const TopicListItem = props => {
   } ${repliedByText}`;
 
   return (
-    <ListItem className={classes.root} divider={true}>
+    <ListItem
+      className={classes.root}
+      divider={true}
+      component={Link}
+      to={`topics/${topic.id}`}
+    >
       <ListItemAvatar>
         <Avatar alt={topic.user.login} src={topic.user.avatar_url} />
       </ListItemAvatar>

@@ -7,6 +7,7 @@ import ViewListIcon from "@material-ui/icons/ViewList";
 import NotificationsIcon from "@material-ui/icons/Notifications";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import CreateIcon from "@material-ui/icons/Create";
+import { Link } from "react-router-dom";
 
 const styles = theme => ({
   root: {
@@ -38,21 +39,29 @@ class MobileBtmNav extends React.Component {
         className={classes.root}
       >
         <BottomNavigationAction
+          component={Link}
+          to="/"
           label="Topics"
           value="topics"
           icon={<ViewListIcon />}
         />
         <BottomNavigationAction
+          component={Link}
+          to="/notifications"
           label="Notifications"
           value="notifications"
           icon={<NotificationsIcon />}
         />
         <BottomNavigationAction
+          component={Link}
+          to="/topics/create"
           label="New topic"
           value="create"
           icon={<CreateIcon />}
         />
         <BottomNavigationAction
+          component={Link}
+          to="/account"
           label="Account"
           value="account"
           icon={<AccountCircleIcon />}
