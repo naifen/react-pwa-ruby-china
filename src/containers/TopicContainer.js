@@ -53,7 +53,9 @@ class TopicContainer extends React.Component {
         this.setState({ isFetchingReplies: true });
 
         const responseR = await fetch(
-          `${TOPIC_BASE_URL}/${this.props.match.params.topicId}/replies`
+          `${TOPIC_BASE_URL}/${
+            this.props.match.params.topicId
+          }/replies?limit=150`
         );
         if (!responseR.ok) {
           throw Error(responseR.statusText);

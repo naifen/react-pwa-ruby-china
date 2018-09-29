@@ -18,7 +18,7 @@ const styles = theme => ({
   }
 });
 
-// TODO: real faviorit count
+// TODO: real move to Topic container
 class TopicNavigation extends React.Component {
   render() {
     const { classes } = this.props;

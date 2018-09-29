@@ -19,7 +19,7 @@ const styles = theme => ({
   }
 });
 
-// TODO: replies pagination/load more button w/ limit&offset
+// TODO: replies pagination/load more button w/ limit&offset???
 const Topic = props => {
   const { classes, isLoading, replies } = props;
 
@@ -34,8 +34,8 @@ const Topic = props => {
         </div>
       ) : (
         <List>
-          {replies.map(reply => (
-            <Reply key={reply.id} reply={reply} />
+          {replies.map((reply, index) => (
+            <Reply key={reply.id} reply={reply} index={index} />
           ))}
         </List>
       )}

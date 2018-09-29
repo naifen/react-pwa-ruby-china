@@ -11,7 +11,7 @@ import ListItemAvatar from "@material-ui/core/ListItemAvatar";
 import ListItemText from "@material-ui/core/ListItemText";
 import Avatar from "@material-ui/core/Avatar";
 import ThumbUpIcon from "@material-ui/icons/ThumbUp";
-import TextField from "@material-ui/core/TextField";
+import Divider from "@material-ui/core/Divider";
 import { Link } from "react-router-dom";
 import { timeSince } from "../utils/dateTimeUtils";
 import "../stylesheets/Markdown.css";
@@ -32,7 +32,8 @@ const styles = theme => ({
     marginBottom: 60,
     backgroundColor: theme.palette.background.default
   },
-  paddingLR: {
+  tpbody: {
+    marginBottom: theme.spacing.unit * 2,
     paddingLeft: theme.spacing.unit * 2,
     paddingRight: theme.spacing.unit * 2
   },
@@ -104,7 +105,7 @@ const Topic = props => {
             </ListItem>
           </List>
 
-          <div className={classes.paddingLR}>
+          <div className={classes.tpbody}>
             {topic.grade === "excellent" && (
               <Typography variant="body2">
                 <ThumbUpIcon className={classes.icon} />
@@ -117,16 +118,17 @@ const Topic = props => {
             />
           </div>
 
-          <TextField
-            id="outlined-textarea"
-            label="Add reply"
-            placeholder="Reply content"
-            multiline
-            className={classes.textField}
-            margin="normal"
-            variant="outlined"
-          />
-          <hr />
+          <Divider />
+
+          <Typography
+            style={{ textAlign: "center", margin: 15 }}
+            variant="title"
+          >
+            Please Login to reply
+          </Typography>
+
+          <Divider />
+
           <ReplyList replies={replies} isLoading={isFetchingReplies} />
         </Paper>
       )}
@@ -135,6 +137,9 @@ const Topic = props => {
 };
 
 // TODO: better reply textarea
+// TODO: scroll to top floating button
+// TODO: Highlight most liked reply
+// TODO: cross out deleted reply?
 
 Topic.propTypes = {
   classes: PropTypes.object.isRequired,

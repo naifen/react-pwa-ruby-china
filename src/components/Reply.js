@@ -31,7 +31,7 @@ const styles = theme => ({
 });
 
 const Reply = props => {
-  const { classes, reply } = props;
+  const { classes, reply, index } = props;
 
   const primaryText = (
     <div
@@ -40,28 +40,31 @@ const Reply = props => {
     />
   );
 
-  // TODO: real #x and clickable
   const secondaryText = (
     <Typography gutterBottom variant="caption" className={classes.secondary}>
       <Grid container spacing={8}>
-        <Grid item xs={9}>
-          {`#1 • ${reply.user.name} • ${timeSince(reply.updated_at)} ago`}
+        <Grid item xs={7}>
+          {`${reply.user.login} #${index + 1} • ${timeSince(
+            reply.updated_at
+          )} ago`}
         </Grid>
-        <Grid item xs={3} className={classes.actions}>
-          <ThumbUpIcon className={classes.icon} />
+        <Grid item xs={5} className={classes.actions}>
           <ReplyIcon className={classes.icon} />
+          <ThumbUpIcon className={classes.icon} />
+          {reply.likes_count > 0 &&
+            ` ${reply.likes_count} like${reply.likes_count > 1 ? `s` : ``}`}
         </Grid>
       </Grid>
     </Typography>
   );
 
-  // TODO: show reply thread (reply to)
+  // TODO: show reply thread (reply to xxx) HOW? no api found
   return (
     <ListItem divider>
       <ListItemAvatar>
         <Avatar
           className={classes.avatar}
-          alt={reply.user.name}
+          alt={reply.user.login}
           src={reply.user.avatar_url}
         />
       </ListItemAvatar>
@@ -72,7 +75,8 @@ const Reply = props => {
 
 Reply.propTypes = {
   classes: PropTypes.object.isRequired,
-  reply: PropTypes.object.isRequired
+  reply: PropTypes.object.isRequired,
+  index: PropTypes.number.isRequired
 };
 
 export default withStyles(styles)(Reply);
