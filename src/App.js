@@ -67,6 +67,9 @@ class App extends Component {
             <Route path="/login" component={LoginForm} />
             <Route path="/register" component={LoginForm} />
             <Route path="/notifications" component={LoginForm} />
+            <Route path="/bookmarks" component={LoginForm} />
+            <Route path="/notes" component={LoginForm} />
+            <Route path="/wikis" component={LoginForm} />
             <Route path="/account" component={LoginForm} />
           </Switch>
 

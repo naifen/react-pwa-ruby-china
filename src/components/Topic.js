@@ -7,12 +7,15 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 import Typography from "@material-ui/core/Typography";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
+import ListItemAvatar from "@material-ui/core/ListItemAvatar";
 import ListItemText from "@material-ui/core/ListItemText";
 import Avatar from "@material-ui/core/Avatar";
 import ThumbUpIcon from "@material-ui/icons/ThumbUp";
+import TextField from "@material-ui/core/TextField";
 import { Link } from "react-router-dom";
 import { timeSince } from "../utils/dateTimeUtils";
 import "../stylesheets/Markdown.css";
+import ReplyList from "../components/ReplyList";
 
 const styles = theme => ({
   root: {
@@ -26,7 +29,7 @@ const styles = theme => ({
     color: theme.palette.grey[600]
   },
   paper: {
-    paddingBottom: 60,
+    marginBottom: 60,
     backgroundColor: theme.palette.background.default
   },
   paddingLR: {
@@ -46,13 +49,19 @@ const styles = theme => ({
     marginTop: -30,
     marginLeft: -30
   },
+  textField: {
+    marginLeft: theme.spacing.unit * 2,
+    marginRight: theme.spacing.unit * 2
+  },
   avatar: {
-    margin: 10
+    margin: 10,
+    width: 45,
+    height: 45
   }
 });
 
 const Topic = props => {
-  const { classes, isLoading, topic } = props;
+  const { classes, isLoading, topic, replies, isFetchingReplies } = props;
 
   const primaryText = (
     <Typography variant="title" gutterBottom>
@@ -75,7 +84,7 @@ const Topic = props => {
         <CircularProgress
           className={classes.progress}
           color="secondary"
-          size={60}
+          size={50}
         />
       ) : (
         <Paper
@@ -85,11 +94,13 @@ const Topic = props => {
           <List className={classes.root}>
             <ListItem divider>
               <ListItemText primary={primaryText} secondary={secondaryText} />
-              <Avatar
-                alt={topic.user && topic.user.name}
-                src={topic.user && topic.user.avatar_url}
-                className={classes.avatar}
-              />
+              <ListItemAvatar>
+                <Avatar
+                  alt={topic.user && topic.user.name}
+                  src={topic.user && topic.user.avatar_url}
+                  className={classes.avatar}
+                />
+              </ListItemAvatar>
             </ListItem>
           </List>
 
@@ -105,18 +116,32 @@ const Topic = props => {
               dangerouslySetInnerHTML={{ __html: topic.body_html }}
             />
           </div>
+
+          <TextField
+            id="outlined-textarea"
+            label="Add reply"
+            placeholder="Reply content"
+            multiline
+            className={classes.textField}
+            margin="normal"
+            variant="outlined"
+          />
+          <hr />
+          <ReplyList replies={replies} isLoading={isFetchingReplies} />
         </Paper>
       )}
     </React.Fragment>
   );
 };
 
-// TODO: add replies
+// TODO: better reply textarea
 
 Topic.propTypes = {
   classes: PropTypes.object.isRequired,
   topic: PropTypes.object.isRequired,
-  isLoading: PropTypes.bool.isRequired
+  isLoading: PropTypes.bool.isRequired,
+  replies: PropTypes.array.isRequired,
+  isFetchingReplies: PropTypes.bool.isRequired
 };
 
 export default withStyles(styles)(Topic);

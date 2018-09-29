@@ -15,7 +15,9 @@ class TopicContainer extends React.Component {
 
     this.state = {
       topic: {},
-      isLoading: false
+      isLoading: false,
+      replies: [],
+      isFetchingReplies: false
       // isPullingDown: false,
       // pullDownHeight: 0,
       // isRefreshing: false
@@ -45,6 +47,24 @@ class TopicContainer extends React.Component {
 
       const json = await response.json();
       this.setState(prevState => afterState(json, prevState));
+
+      // fetch replies
+      if (json.topic.replies_count > 0) {
+        this.setState({ isFetchingReplies: true });
+
+        const responseR = await fetch(
+          `${TOPIC_BASE_URL}/${this.props.match.params.topicId}/replies`
+        );
+        if (!responseR.ok) {
+          throw Error(responseR.statusText);
+        }
+
+        const jsonR = await responseR.json();
+        this.setState({
+          replies: jsonR.replies,
+          isFetchingReplies: false
+        });
+      }
     } catch (error) {
       console.log(error);
     }

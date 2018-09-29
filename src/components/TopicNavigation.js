@@ -18,6 +18,7 @@ const styles = theme => ({
   }
 });
 
+// TODO: real faviorit count
 class TopicNavigation extends React.Component {
   render() {
     const { classes } = this.props;

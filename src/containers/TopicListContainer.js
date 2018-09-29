@@ -11,6 +11,7 @@ import {
 
 export const TopicContext = React.createContext();
 
+// TODO: state without constructor for all if possible
 class TopicListContainer extends React.Component {
   constructor(props) {
     super(props);
