@@ -9,8 +9,6 @@ import { TOPIC_BASE_URL } from "../utils/constants";
 //   SCROLL_TRIGGER_HEIGHT
 // } from "../utils/constants";
 
-// export const TopicContext = React.createContext();
-
 class TopicContainer extends React.Component {
   constructor(props) {
     super(props);

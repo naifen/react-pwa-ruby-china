@@ -6,7 +6,8 @@ import Typography from "@material-ui/core/Typography";
 import PropTypes from "prop-types";
 import TopicListContainer from "./containers/TopicListContainer";
 import TopicContainer from "./containers/TopicContainer";
-import MainNavigation from "./components/MobileBtmNav";
+import MainNavigation from "./components/MainNavigation";
+import TopicNavigation from "./components/TopicNavigation";
 import LoginForm from "./components/LoginForm";
 import "./App.css";
 
@@ -43,6 +44,14 @@ const styles = theme => ({
 class App extends Component {
   render() {
     const { classes } = this.props;
+    const path = window.location.pathname;
+    // TODO: nav icon based on states
+    const Navigation =
+      path.length >= 10 && path.substring(0, 8) === "/topics/" ? (
+        <TopicNavigation />
+      ) : (
+        <MainNavigation />
+      );
 
     return (
       <React.Fragment>
@@ -51,19 +60,17 @@ class App extends Component {
           <Switch>
             <Route exact path="/" component={TopicListContainer} />
             <Route exact path="/topics" component={TopicListContainer} />
-            <Route path="/topics/create" component={LoginForm} />
             <Route path="/topics/:topicId" component={TopicContainer} />
             <Route exact path="/nodes" component={NodeList} />
             <Route path="/nodes/:nodeId" component={Node} />
+            <Route path="/compose" component={LoginForm} />
             <Route path="/login" component={LoginForm} />
             <Route path="/register" component={LoginForm} />
             <Route path="/notifications" component={LoginForm} />
             <Route path="/account" component={LoginForm} />
           </Switch>
 
-          <div className={classes.sectionMobile}>
-            <MainNavigation />
-          </div>
+          <div className={classes.sectionMobile}>{Navigation}</div>
 
           <div className={classes.sectionDesktop}>
             <footer className={classes.footer}>
