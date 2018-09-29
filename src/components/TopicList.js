@@ -19,7 +19,7 @@ const styles = theme => ({
     backgroundColor: theme.palette.background.default
   },
   progress: {
-    marginTop: theme.spacing.unit * 2
+    marginTop: theme.spacing.unit * 5
   }
 });
 

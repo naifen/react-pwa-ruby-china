@@ -10,6 +10,11 @@ import MainNavigation from "./components/MobileBtmNav";
 import LoginForm from "./components/LoginForm";
 import "./App.css";
 
+// TODO: remove these 2 temp components
+const NodeList = () => <div>This is NodeList component</div>;
+
+const Node = () => <div>This is Node component</div>;
+
 const styles = theme => ({
   sectionDesktop: {
     display: "none",
@@ -32,7 +37,8 @@ const styles = theme => ({
 });
 
 // TODO: do NOT re-fetch topics when switch between url
-// TODO: redirect when hit private route
+// (move fetch to App component or use ServiceWorker to cache)
+// TODO: add PrivateRoute and redirect when hit private route
 // TODO: move routes to a sepreate file
 class App extends Component {
   render() {
@@ -47,6 +53,8 @@ class App extends Component {
             <Route exact path="/topics" component={TopicListContainer} />
             <Route path="/topics/create" component={LoginForm} />
             <Route path="/topics/:topicId" component={TopicContainer} />
+            <Route exact path="/nodes" component={NodeList} />
+            <Route path="/nodes/:nodeId" component={Node} />
             <Route path="/login" component={LoginForm} />
             <Route path="/register" component={LoginForm} />
             <Route path="/notifications" component={LoginForm} />
