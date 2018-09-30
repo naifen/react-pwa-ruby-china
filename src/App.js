@@ -7,7 +7,6 @@ import PropTypes from "prop-types";
 import TopicListContainer from "./containers/TopicListContainer";
 import TopicContainer from "./containers/TopicContainer";
 import MainNavigation from "./components/MainNavigation";
-import TopicNavigation from "./components/TopicNavigation";
 import LoginForm from "./components/LoginForm";
 import "./App.css";
 
@@ -45,14 +44,8 @@ class App extends Component {
   render() {
     const { classes } = this.props;
     const path = window.location.pathname;
-    // TODO: nav icon based on states
-    const Navigation =
-      path.length >= 10 && path.substring(0, 8) === "/topics/" ? (
-        <TopicNavigation />
-      ) : (
-        <MainNavigation />
-      );
 
+    // TODO: fetch states, eg notifications, etc and show on MainNav
     return (
       <React.Fragment>
         <CssBaseline />
@@ -73,7 +66,10 @@ class App extends Component {
             <Route path="/account" component={LoginForm} />
           </Switch>
 
-          <div className={classes.sectionMobile}>{Navigation}</div>
+          <div className={classes.sectionMobile}>
+            {path.substring(0, 8) !== "/topics/" &&
+              !/^\d+$/.test(path.substring(8)) && <MainNavigation />}
+          </div>
 
           <div className={classes.sectionDesktop}>
             <footer className={classes.footer}>

@@ -1,14 +1,9 @@
 import React from "react";
 import Topic from "../components/Topic";
+import TopicNavigation from "../components/TopicNavigation";
 import { TOPIC_BASE_URL } from "../utils/constants";
 
 // TODO: implements pull down fetch
-// import {
-//   PULL_DOWN_MAX_HEIGHT,
-//   PULL_DOWN_RELEASE_HEIGHT,
-//   SCROLL_TRIGGER_HEIGHT
-// } from "../utils/constants";
-
 class TopicContainer extends React.Component {
   constructor(props) {
     super(props);
@@ -18,9 +13,6 @@ class TopicContainer extends React.Component {
       isLoading: false,
       replies: [],
       isFetchingReplies: false
-      // isPullingDown: false,
-      // pullDownHeight: 0,
-      // isRefreshing: false
     };
   }
 
@@ -73,7 +65,12 @@ class TopicContainer extends React.Component {
   };
 
   render() {
-    return <Topic {...this.state} />;
+    return (
+      <React.Fragment>
+        <Topic {...this.state} />
+        <TopicNavigation likesCount={this.state.topic.likes_count || 0} />
+      </React.Fragment>
+    );
   }
 }
 

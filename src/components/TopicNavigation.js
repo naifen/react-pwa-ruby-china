@@ -8,6 +8,7 @@ import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import NotificationsActiveIcon from "@material-ui/icons/NotificationsActive";
 import BookmarkBorderIcon from "@material-ui/icons/BookmarkBorder";
 import ShareIcon from "@material-ui/icons/Share";
+import { Link } from "react-router-dom";
 
 const styles = theme => ({
   root: {
@@ -18,11 +19,12 @@ const styles = theme => ({
   }
 });
 
-// TODO: real move to Topic container
 class TopicNavigation extends React.Component {
   render() {
-    const { classes } = this.props;
+    const { classes, likesCount } = this.props;
 
+    // TODO: use meta apis, eg meta.followed to determine icon border/filled
+    // TODO: implement share menu similar to ios's behavior
     return (
       <BottomNavigation showLabels className={classes.root}>
         <BottomNavigationAction
@@ -31,16 +33,22 @@ class TopicNavigation extends React.Component {
           icon={<ArrowBackIcon />}
         />
         <BottomNavigationAction
-          label="20"
+          component={Link}
+          to="/login"
+          label={likesCount}
           value="add-favorite"
           icon={<FavoriteBorderIcon />}
         />
         <BottomNavigationAction
+          component={Link}
+          to="/login"
           label="Watch"
           value="add-notification"
           icon={<NotificationsActiveIcon />}
         />
         <BottomNavigationAction
+          component={Link}
+          to="/login"
           label="Bookmark"
           value="add-bookmark"
           icon={<BookmarkBorderIcon />}
@@ -56,7 +64,8 @@ class TopicNavigation extends React.Component {
 }
 
 TopicNavigation.propTypes = {
-  classes: PropTypes.object.isRequired
+  classes: PropTypes.object.isRequired,
+  likesCount: PropTypes.number.isRequired
 };
 
 export default withStyles(styles)(TopicNavigation);

@@ -59,6 +59,7 @@ const Reply = props => {
   );
 
   // TODO: show reply thread (reply to xxx) HOW? no api found
+  // TODO: Avatar above reply body???
   return (
     <ListItem divider>
       <ListItemAvatar>
