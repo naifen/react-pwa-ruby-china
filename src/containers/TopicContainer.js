@@ -12,7 +12,8 @@ class TopicContainer extends React.Component {
       topic: {},
       isLoading: false,
       replies: [],
-      isFetchingReplies: false
+      isFetchingReplies: false,
+      showScrollTop: false
     };
   }
 
@@ -25,7 +26,24 @@ class TopicContainer extends React.Component {
         isLoading: false
       })
     );
+
+    window.addEventListener("scroll", this.onScroll, false);
   }
+
+  componentWillUnmount() {
+    window.removeEventListener("scroll", this.onScroll);
+  }
+
+  onScroll = () => {
+    if (
+      document.body.scrollTop > 60 ||
+      document.documentElement.scrollTop > 60
+    ) {
+      this.setState({ showScrollTop: true });
+    } else {
+      this.setState({ showScrollTop: false });
+    }
+  };
 
   // TODO: DRY this out to utils function awa TopicListContainer
   handleTopicFetch = async (url, beforeState, afterState) => {

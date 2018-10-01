@@ -11,7 +11,9 @@ import ListItemAvatar from "@material-ui/core/ListItemAvatar";
 import ListItemText from "@material-ui/core/ListItemText";
 import Avatar from "@material-ui/core/Avatar";
 import ThumbUpIcon from "@material-ui/icons/ThumbUp";
+import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
 import Divider from "@material-ui/core/Divider";
+import Button from "@material-ui/core/Button";
 import { Link } from "react-router-dom";
 import { timeSince } from "../utils/dateTimeUtils";
 import "../stylesheets/Markdown.css";
@@ -58,11 +60,23 @@ const styles = theme => ({
     margin: 10,
     width: 45,
     height: 45
+  },
+  fab: {
+    position: "fixed",
+    bottom: theme.spacing.unit * 8,
+    right: theme.spacing.unit
   }
 });
 
 const Topic = props => {
-  const { classes, isLoading, topic, replies, isFetchingReplies } = props;
+  const {
+    classes,
+    isLoading,
+    topic,
+    replies,
+    isFetchingReplies,
+    showScrollTop
+  } = props;
 
   const primaryText = (
     <Typography variant="title" gutterBottom>
@@ -85,7 +99,7 @@ const Topic = props => {
         <CircularProgress
           className={classes.progress}
           color="secondary"
-          size={50}
+          size={60}
         />
       ) : (
         <Paper
@@ -130,6 +144,19 @@ const Topic = props => {
           <Divider />
 
           <ReplyList replies={replies} isLoading={isFetchingReplies} />
+          {showScrollTop && (
+            <Button
+              mini
+              variant="fab"
+              className={classes.fab}
+              color="secondary"
+              onClick={() => {
+                window.scrollTo({ top: 0, behavior: "smooth" });
+              }}
+            >
+              <KeyboardArrowUpIcon />
+            </Button>
+          )}
         </Paper>
       )}
     </React.Fragment>
@@ -137,9 +164,6 @@ const Topic = props => {
 };
 
 // TODO: better reply textarea
-// TODO: scroll to top floating button
-// TODO: Highlight most liked reply
-// TODO: cross out deleted reply?
 
 Topic.propTypes = {
   classes: PropTypes.object.isRequired,

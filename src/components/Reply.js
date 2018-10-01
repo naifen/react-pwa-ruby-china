@@ -27,6 +27,14 @@ const styles = theme => ({
     marginLeft: theme.spacing.unit,
     marginBottom: -3,
     fontSize: 16
+  },
+  yellowBG: {
+    backgroundColor: "#fffce9"
+  },
+  deleted: {
+    textDecoration: "line-through",
+    margin: "auto",
+    color: theme.palette.grey[400]
   }
 });
 
@@ -61,15 +69,32 @@ const Reply = props => {
   // TODO: show reply thread (reply to xxx) HOW? no api found
   // TODO: Avatar above reply body???
   return (
-    <ListItem divider>
-      <ListItemAvatar>
-        <Avatar
-          className={classes.avatar}
-          alt={reply.user.login}
-          src={reply.user.avatar_url}
-        />
-      </ListItemAvatar>
-      <ListItemText primary={primaryText} secondary={secondaryText} />
+    <ListItem
+      divider
+      className={
+        reply.likes_count >= 5 && !reply.deleted ? classes.yellowBG : ""
+      }
+    >
+      {reply.deleted ? (
+        <Typography
+          variant="subheading"
+          align="center"
+          className={classes.deleted}
+        >
+          Reply #{index + 1} has been deleted
+        </Typography>
+      ) : (
+        <React.Fragment>
+          <ListItemAvatar>
+            <Avatar
+              className={classes.avatar}
+              alt={reply.user.login}
+              src={reply.user.avatar_url}
+            />
+          </ListItemAvatar>
+          <ListItemText primary={primaryText} secondary={secondaryText} />
+        </React.Fragment>
+      )}
     </ListItem>
   );
 };
