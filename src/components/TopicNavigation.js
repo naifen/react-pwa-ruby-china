@@ -24,7 +24,8 @@ class TopicNavigation extends React.Component {
     const { classes, likesCount } = this.props;
 
     // TODO: use meta apis, eg meta.followed to determine icon border/filled
-    // TODO: implement share menu similar to ios's behavior
+    // TODO: implement share menu similar to ios's behavior use Web Share API
+    // https://developers.google.com/web/updates/2016/09/navigator-share
     return (
       <BottomNavigation showLabels className={classes.root}>
         <BottomNavigationAction

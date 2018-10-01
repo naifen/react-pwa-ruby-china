@@ -1,19 +1,11 @@
 import React, { Component } from "react";
-import { Switch, Route } from "react-router-dom";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import { withStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import PropTypes from "prop-types";
-import TopicListContainer from "./containers/TopicListContainer";
-import TopicContainer from "./containers/TopicContainer";
 import MainNavigation from "./components/MainNavigation";
-import LoginForm from "./components/LoginForm";
+import routes from "./config/routes";
 import "./App.css";
-
-// TODO: remove these 2 temp components
-const NodeList = () => <div>This is NodeList component</div>;
-
-const Node = () => <div>This is Node component</div>;
 
 const styles = theme => ({
   sectionDesktop: {
@@ -38,8 +30,6 @@ const styles = theme => ({
 
 // TODO: do NOT re-fetch topics when switch between url
 // (move fetch to App component or use ServiceWorker to cache)
-// TODO: add PrivateRoute and redirect when hit private route
-// TODO: move routes to a sepreate file
 class App extends Component {
   render() {
     const { classes } = this.props;
@@ -50,25 +40,13 @@ class App extends Component {
       <React.Fragment>
         <CssBaseline />
         <div className="App">
-          <Switch>
-            <Route exact path="/" component={TopicListContainer} />
-            <Route exact path="/topics" component={TopicListContainer} />
-            <Route path="/topics/:topicId" component={TopicContainer} />
-            <Route exact path="/nodes" component={NodeList} />
-            <Route path="/nodes/:nodeId" component={Node} />
-            <Route path="/compose" component={LoginForm} />
-            <Route path="/login" component={LoginForm} />
-            <Route path="/register" component={LoginForm} />
-            <Route path="/notifications" component={LoginForm} />
-            <Route path="/bookmarks" component={LoginForm} />
-            <Route path="/notes" component={LoginForm} />
-            <Route path="/wikis" component={LoginForm} />
-            <Route path="/account" component={LoginForm} />
-          </Switch>
+          {routes}
 
           <div className={classes.sectionMobile}>
-            {path.substring(0, 8) !== "/topics/" &&
-              !/^\d+$/.test(path.substring(8)) && <MainNavigation />}
+            {!(
+              path.substring(0, 8) === "/topics/" &&
+              /^\d+$/.test(path.substring(8))
+            ) && <MainNavigation />}
           </div>
 
           <div className={classes.sectionDesktop}>
