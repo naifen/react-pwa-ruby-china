@@ -2,6 +2,7 @@ import React from "react";
 import Topic from "../components/Topic";
 import TopicNavigation from "../components/TopicNavigation";
 import { TOPIC_BASE_URL } from "../utils/constants";
+import fetchFrom from "../utils/fetchServices";
 
 // TODO: implements pull down fetch
 class TopicContainer extends React.Component {
@@ -24,6 +25,12 @@ class TopicContainer extends React.Component {
       json => ({
         topic: json.topic,
         isLoading: false
+      }),
+      `${TOPIC_BASE_URL}/${this.props.match.params.topicId}/replies?limit=150`,
+      { isFetchingReplies: true },
+      json => ({
+        replies: json.replies,
+        isFetchingReplies: false
       })
     );
 
@@ -45,40 +52,28 @@ class TopicContainer extends React.Component {
     }
   };
 
-  // TODO: DRY this out to utils function awa TopicListContainer
-  handleTopicFetch = async (url, beforeState, afterState) => {
+  handleTopicFetch = async (
+    url,
+    beforeState,
+    afterState,
+    url2,
+    beforeState2,
+    afterState2
+  ) => {
     try {
       this.setState(beforeState);
+      const json = await fetchFrom(url);
+      this.setState(afterState(json));
 
-      const response = await fetch(url);
-      if (!response.ok) {
-        throw Error(response.statusText);
-      }
-
-      const json = await response.json();
-      this.setState(prevState => afterState(json, prevState));
-
-      // fetch replies
+      // fetch replies only if topic has replies
       if (json.topic.replies_count > 0) {
-        this.setState({ isFetchingReplies: true });
+        this.setState(beforeState2);
 
-        const responseR = await fetch(
-          `${TOPIC_BASE_URL}/${
-            this.props.match.params.topicId
-          }/replies?limit=150`
-        );
-        if (!responseR.ok) {
-          throw Error(responseR.statusText);
-        }
-
-        const jsonR = await responseR.json();
-        this.setState({
-          replies: jsonR.replies,
-          isFetchingReplies: false
-        });
+        const json2 = await fetchFrom(url2);
+        this.setState(afterState2(json2));
       }
     } catch (error) {
-      console.log(error);
+      throw Error(error);
     }
   };
 
