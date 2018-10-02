@@ -34,6 +34,12 @@ class App extends Component {
   render() {
     const { classes } = this.props;
     const path = window.location.pathname;
+    const Navigation =
+      path.substring(0) === "/login" || path.substring(0) === "/register" ? (
+        ""
+      ) : (
+        <MainNavigation />
+      );
 
     // TODO: fetch states, eg notifications, etc and show on MainNav
     return (
@@ -46,7 +52,7 @@ class App extends Component {
             {!(
               path.substring(0, 8) === "/topics/" &&
               /^\d+$/.test(path.substring(8))
-            ) && <MainNavigation />}
+            ) && Navigation}
           </div>
 
           <div className={classes.sectionDesktop}>

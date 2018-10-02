@@ -6,11 +6,10 @@ import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
-import { Link } from "react-router-dom";
 import FormGroup from "@material-ui/core/FormGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
-import Divider from "@material-ui/core/Divider";
+import { Link } from "react-router-dom";
 
 const styles = theme => ({
   root: {
@@ -31,9 +30,24 @@ const LoginForm = props => (
     <Typography variant="title" className={props.classes.marginbtm}>
       Welcome to Ruby China PWA
     </Typography>
-    <Typography variant="body1" className={props.classes.marginbtm}>
-      Please sign in to continue
-    </Typography>
+    <TextField
+      label="Username"
+      fullWidth
+      type="username"
+      name="username"
+      autoComplete="username"
+      margin="dense"
+      variant="outlined"
+    />
+    <TextField
+      label="Name"
+      fullWidth
+      type="name"
+      name="name"
+      autoComplete="name"
+      margin="dense"
+      variant="outlined"
+    />
     <TextField
       label="Email"
       fullWidth
@@ -43,6 +57,12 @@ const LoginForm = props => (
       margin="dense"
       variant="outlined"
     />
+    <FormGroup row>
+      <FormControlLabel
+        control={<Checkbox checked={false} value="shareEmail" />}
+        label="Anyone can view my email"
+      />
+    </FormGroup>
     <TextField
       label="Password"
       fullWidth
@@ -52,49 +72,46 @@ const LoginForm = props => (
       margin="dense"
       variant="outlined"
     />
-    <FormGroup row>
-      <FormControlLabel
-        className={props.classes.marginbtm}
-        control={<Checkbox checked={false} value="shareEmail" />}
-        label="Remember me for 60 days"
-      />
-    </FormGroup>
+    <TextField
+      label="Password Confirmation"
+      fullWidth
+      type="password"
+      name="password confirmation"
+      autoComplete="password confirmation"
+      margin="dense"
+      variant="outlined"
+    />
+    <TextField
+      label="Verification Code"
+      className={props.classes.marginbtm}
+      fullWidth
+      type="verification"
+      name="verification"
+      autoComplete="verification"
+      margin="dense"
+      variant="outlined"
+    />
+
     <Grid container spacing={16}>
       <Grid item xs={12}>
         <Button variant="contained" color="secondary" size="large" fullWidth>
-          Sign in
-        </Button>
-      </Grid>
-      <Grid item xs={12}>
-        <Typography variant="subheading" align="left">
-          Login in with other services
-        </Typography>
-        <Divider />
-      </Grid>
-      <Grid item xs={12}>
-        <Button variant="outlined" size="large" fullWidth>
-          Login with Github
+          Sign Up
         </Button>
       </Grid>
       <Grid item xs={6}>
-        <Button
-          component={Link}
-          to={(props.location.state && props.location.state.from) || "/"}
-          variant="contained"
-          fullWidth
-        >
+        <Button variant="contained" fullWidth>
           go back
         </Button>
       </Grid>
       <Grid item xs={6}>
         <Button
           component={Link}
-          to="/register"
+          to="/login"
           variant="contained"
           color="primary"
           fullWidth
         >
-          Sign Up
+          Sign In
         </Button>
       </Grid>
       <Grid item xs={6}>
@@ -111,7 +128,6 @@ const LoginForm = props => (
     </Grid>
   </Paper>
 );
-// access from routes https://reacttraining.com/react-router/web/api/Redirect/to-object
 
 LoginForm.propTypes = {
   classes: PropTypes.object.isRequired

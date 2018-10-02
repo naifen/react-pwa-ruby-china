@@ -5,6 +5,7 @@ import TopicContainer from "../containers/TopicContainer";
 import LoginForm from "../components/LoginForm";
 import NodeList from "../components/NodeList";
 import Node from "../components/Node";
+import Register from "../components/RegisterForm";
 
 // TODO: replace temp mock auth service with real one
 const MockAuth = { isAuthenticated: false };
@@ -16,7 +17,6 @@ const Notifications = () => <div>This is Notifications component</div>;
 const Bookmarks = () => <div>This is Bookmarks component</div>;
 const Notes = () => <div>This is Notes component</div>;
 const Wikis = () => <div>This is Wikis component</div>;
-const Register = () => <div>This is Register component</div>;
 
 const RestrictRoute = ({ component: Component, ...rest }) => {
   return (
