@@ -15,11 +15,12 @@ const styles = theme => ({
     margin: "auto",
     maxWidth: 960,
     overflow: "auto",
-    paddingBottom: 60,
+    marginBottom: 50,
+    paddingBottom: theme.spacing.unit,
     backgroundColor: theme.palette.background.default
   },
   progress: {
-    marginTop: theme.spacing.unit * 2
+    marginTop: theme.spacing.unit
   }
 });
 

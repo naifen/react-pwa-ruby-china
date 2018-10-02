@@ -8,9 +8,11 @@ import {
   PULL_DOWN_RELEASE_HEIGHT,
   SCROLL_TRIGGER_HEIGHT
 } from "../utils/constants";
+import fetchFrom from "../utils/fetchServices";
 
 export const TopicContext = React.createContext();
 
+// TODO: state without constructor for all if possible
 class TopicListContainer extends React.Component {
   constructor(props) {
     super(props);
@@ -49,15 +51,10 @@ class TopicListContainer extends React.Component {
     try {
       this.setState(beforeState);
 
-      const response = await fetch(url);
-      if (!response.ok) {
-        throw Error(response.statusText);
-      }
-
-      const json = await response.json();
+      const json = await fetchFrom(url);
       this.setState(prevState => afterState(json, prevState));
     } catch (error) {
-      console.log(error);
+      throw Error(error);
     }
   };
 

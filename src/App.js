@@ -3,8 +3,8 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import { withStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import PropTypes from "prop-types";
-import MainNavigation from "./components/MobileBtmNav";
-import TopicListContainer from "./containers/TopicListContainer";
+import MainNavigation from "./components/MainNavigation";
+import routes from "./config/routes";
 import "./App.css";
 
 const styles = theme => ({
@@ -28,18 +28,31 @@ const styles = theme => ({
   }
 });
 
+// TODO: do NOT re-fetch topics when switch between url
+// (move fetch to App component or use ServiceWorker to cache)
 class App extends Component {
   render() {
     const { classes } = this.props;
+    const path = window.location.pathname;
+    const Navigation =
+      path.substring(0) === "/login" || path.substring(0) === "/register" ? (
+        ""
+      ) : (
+        <MainNavigation />
+      );
 
+    // TODO: fetch states, eg notifications, etc and show on MainNav
     return (
       <React.Fragment>
         <CssBaseline />
         <div className="App">
-          <TopicListContainer />
+          {routes}
 
           <div className={classes.sectionMobile}>
-            <MainNavigation />
+            {!(
+              path.substring(0, 8) === "/topics/" &&
+              /^\d+$/.test(path.substring(8))
+            ) && Navigation}
           </div>
 
           <div className={classes.sectionDesktop}>

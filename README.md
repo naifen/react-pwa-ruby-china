@@ -68,7 +68,8 @@ $ yarn start
 - infinite scroll in react <https://www.robinwieruch.de/react-infinite-scroll/>
 - pull down: <https://developers.google.com/web/updates/2017/11/overscroll-behavior>
 - ESlint + Prettier: <https://www.youtube.com/watch?v=bfyI9yl3qfE> & <https://medium.com/appstud/eslint-and-prettier-working-on-visual-studio-code-with-create-react-app-32dfef4b029c>
-- Jest + Enzyme : <https://medium.com/codeclan/testing-react-with-jest-and-enzyme-20505fec4675>
+- Jest + Enzyme: <https://medium.com/codeclan/testing-react-with-jest-and-enzyme-20505fec4675>
+- React Router V4: <https://www.sitepoint.com/react-router-v4-complete-guide/>
 
 ## Roadmap
 
@@ -81,7 +82,7 @@ $ yarn start
 - [ ] star & subscribe a topic
 - [ ] comment on a topic, reply and like comments
 - [ ] create bookmarks & notes
-- [ ] push notification
+- [ ] push notifications
 
 ## Contributor & Maintainer
 
