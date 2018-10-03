@@ -1,16 +1,20 @@
 # React.js PWA Ruby China
 
-> A React.js PWA using RubyChina's apis, mobile first and desktop responsive UI & UX.
+> A mobile first React.js PWA using RubyChina's apis, responsive desktop UI & UX is also included.
 
 ## Motivation
 
-I consider myself as "rubyist" 😄 and I browse various of ruby sites on a daily basis to learn new stuffs. <https://ruby-china.org/> is one of them, which is the biggest ruby community in China.
+As "rubyist"😄, I browse various of ruby sites on a daily basis to learn new stuffs. <https://ruby-china.org/> is one of them, which is the biggest ruby community in China.
 
-The official IOS client is pretty good and I enjoyed it a lot. Recently I switched to an Android device but couldn't find a decent and up-to-date client. (the site itself is responsive, it doesn't feel like an app tho)
+The official Ruby China IOS client is awesome and I enjoyed it a lot. Recently I switched to an Android device and couldn't find a decent and up-to-date client. (tho the site itself is responsive, it doesn't feel like an app)
 
-Since the ruby-china maintainers made some great APIs as well, I figured why not roll my own client? It's 2018 now, PWA is a thing, React's became many folks go-to UI framework, so I decided to combine these two together and give it a try.
+Since the ruby-china maintainers made great APIs, I figured why not roll my own client? It's 2018 now, PWA is a thing, React's became many folks go-to UI framework. So I decided to combine these two and give it a try.
 
-My goal here is to focus on the mobile UI (Material Design <https://material-ui.com/> is my choice) & UX similar to IOS version. The final app can be saved to desktop and work just like a native client(which is what a PWA suppose to be like). I'll try not to bloat it with npm packages and keep it snappy, minimal and reliable.
+My goal here is to focus on the mobile UI (Material Design <https://material-ui.com/> is my choice) & UX similar to the offcial IOS version. The app can be saved to desktop and work just like a native client(which is what a PWA suppose to be like). I'll try not to bloat it with too many npm packages, rather just keep it snappy, minimal and reliable.
+
+## Status
+
+WIP, features listed in the roadmap will be implemented.
 
 ## Demo
 
