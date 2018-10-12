@@ -28,8 +28,6 @@ const styles = theme => ({
   }
 });
 
-// TODO: do NOT re-fetch topics when switch between url
-// (move fetch to App component or use ServiceWorker to cache)
 class App extends Component {
   render() {
     const { classes } = this.props;
