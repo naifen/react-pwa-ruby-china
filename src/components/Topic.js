@@ -16,8 +16,8 @@ import Divider from "@material-ui/core/Divider";
 import Button from "@material-ui/core/Button";
 import { Link } from "react-router-dom";
 import { timeSince } from "../utils/dateTimeUtils";
-import "../stylesheets/Markdown.css";
 import ReplyList from "../components/ReplyList";
+import "../stylesheets/Markdown.css";
 
 const styles = theme => ({
   root: {

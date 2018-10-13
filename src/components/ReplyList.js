@@ -19,7 +19,7 @@ const styles = theme => ({
   }
 });
 
-// TODO: replies pagination/load more button w/ limit&offset???
+// TODO: replies pagination or "load more" button
 const Topic = props => {
   const { classes, isLoading, replies } = props;
 
